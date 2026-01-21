@@ -35,4 +35,18 @@ class AbsensiService {
       "status": status,
     });
   }
+  
+  void updateAbsensi({
+  required String key,
+  required String nama,
+  required String kelas,
+  required String status,
+}) {
+  _db.child(key).update({
+    "nama": nama,
+    "kelas": kelas,
+    "status": status,
+  });
+}
+
 }
