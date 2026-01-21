@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "733954769873",
+    "project_id": "flutterpushnotification-ec867",
+    "storage_bucket": "flutterpushnotification-ec867.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:733954769873:android:f2d0e150cf16c5804c16f0",
+        "android_client_info": {
+          "package_name": "com.example.latihan1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "733954769873-iq7sk5vpi2vgn7orjtugg19fn462sp6p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.latihan1",
+            "certificate_hash": "022cfa37b9ac4daaaeca128b99f7a9651af3d5b1"
+          }
+        },
+        {
+          "client_id": "733954769873-05gore4ttdh53u1rquo60vcr4iv2l7pn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbsptE2ErcG2RPZET76a0TNbj59MVjoa4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "733954769873-05gore4ttdh53u1rquo60vcr4iv2l7pn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
