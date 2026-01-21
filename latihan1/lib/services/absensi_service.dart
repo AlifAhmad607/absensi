@@ -13,18 +13,19 @@ class AbsensiService {
 
   DatabaseReference get ref => _db;
 
-  void tambahAbsensi({
-    required String nama,
-    required String kelas,
-    required String status,
-  }) {
-    _db.push().set({
-      "nama": nama,
-      "kelas": kelas,
-      "status": status,
-      "tanggal": DateTime.now().toString().substring(0, 10),
-    });
-  }
+  Future<void> tambahAbsensi({
+  required String nama,
+  required String kelas,
+  required String status,
+}) async {
+  await _db.push().set({
+    "nama": nama,
+    "kelas": kelas,
+    "status": status,
+    "tanggal": DateTime.now().toString().substring(0, 10),
+  });
+}
+
 
   void hapusAbsensi(String key) {
     _db.child(key).remove();
@@ -36,12 +37,12 @@ class AbsensiService {
     });
   }
   
-  void updateAbsensi({
+  Future<void> updateAbsensi({
   required String key,
   required String nama,
   required String kelas,
   required String status,
-}) {
+}) async {
   _db.child(key).update({
     "nama": nama,
     "kelas": kelas,

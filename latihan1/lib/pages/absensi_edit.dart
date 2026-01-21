@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../services/absensi_service.dart';
+import 'package:latihan1/controller/absensi_controller.dart';
+import 'package:latihan1/services/absensi_service.dart';
 
 class EditAbsensiPage extends StatefulWidget {
   final AbsensiService service;
@@ -18,16 +19,20 @@ class EditAbsensiPage extends StatefulWidget {
 }
 
 class _EditAbsensiPageState extends State<EditAbsensiPage> {
-  late TextEditingController namaC;
-  late TextEditingController kelasC;
-  late String status;
+  late final AbsensiController controller;
 
   @override
   void initState() {
     super.initState();
-    namaC = TextEditingController(text: widget.data["nama"]);
-    kelasC = TextEditingController(text: widget.data["kelas"]);
-    status = widget.data["status"];
+    // 🔧 Buat controller dengan service dari widget
+    controller = AbsensiController(service: widget.service);
+    controller.isiDariData(widget.data);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -40,7 +45,7 @@ class _EditAbsensiPageState extends State<EditAbsensiPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextField(
-              controller: namaC,
+              controller: controller.namaC,
               decoration: const InputDecoration(
                 labelText: "Nama",
                 border: OutlineInputBorder(),
@@ -48,7 +53,7 @@ class _EditAbsensiPageState extends State<EditAbsensiPage> {
             ),
             const SizedBox(height: 8),
             TextField(
-              controller: kelasC,
+              controller: controller.kelasC,
               decoration: const InputDecoration(
                 labelText: "Kelas",
                 border: OutlineInputBorder(),
@@ -56,7 +61,7 @@ class _EditAbsensiPageState extends State<EditAbsensiPage> {
             ),
             const SizedBox(height: 8),
             DropdownButtonFormField<String>(
-              value: status,
+              value: controller.status,
               decoration: const InputDecoration(
                 labelText: "Status",
                 border: OutlineInputBorder(),
@@ -67,22 +72,14 @@ class _EditAbsensiPageState extends State<EditAbsensiPage> {
                         child: Text(e),
                       ))
                   .toList(),
-              onChanged: (v) => setState(() => status = v!),
+              onChanged: (v) => setState(() => controller.status = v!),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () {
-                widget.service.updateAbsensi(
-                  key: widget.keyData,
-                  nama: namaC.text,
-                  kelas: kelasC.text,
-                  status: status,
-                );
-                Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Data berhasil diperbarui")),
-                );
-              },
+              onPressed: () => controller.updateAbsensi(
+                context: context,
+                key: widget.keyData,
+              ),
               child: const Text("Update"),
             ),
           ],
