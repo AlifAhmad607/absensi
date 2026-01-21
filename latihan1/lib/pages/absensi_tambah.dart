@@ -21,7 +21,6 @@ class _TambahAbsensiPageState extends State<TambahAbsensiPage> {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextField(
               controller: namaC,
@@ -61,7 +60,8 @@ class _TambahAbsensiPageState extends State<TambahAbsensiPage> {
                   kelas: kelasC.text,
                   status: status,
                 );
-                Navigator.pop(context);
+                namaC.clear();
+                kelasC.clear();
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text("Data berhasil ditambahkan")),
                 );
