@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../services/absensi_service.dart';
-import '../widget/absensi_list.dart';
-import 'absensi_edit.dart';
+import 'package:latihan1/services/absensi_service.dart';
+import 'package:latihan1/widget/absensi_list.dart';
 
 class AbsensiPage extends StatelessWidget {
   final AbsensiService service;

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:latihan1/pages/home_absensi_page.dart';
+import 'package:latihan1/Routes/AppRoutes.dart';
+import 'package:latihan1/Routes/AppPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -13,9 +16,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeAbsensiPage(),
+      initialRoute: Approutes.homeAbsensi,
+      getPages: Apppage.pages,
     );
   }
 }
