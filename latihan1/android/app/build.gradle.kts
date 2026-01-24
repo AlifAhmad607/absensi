@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.latihan1"
-    compileSdk = 35
+    compileSdk = 36
     ndkVersion = "29.0.14206865"
 
     compileOptions {

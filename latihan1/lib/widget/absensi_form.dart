@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../services/absensi_service.dart';
+import 'package:latihan1/services/absensi_service.dart';
 
 class AbsensiForm extends StatefulWidget {
   final AbsensiService service;

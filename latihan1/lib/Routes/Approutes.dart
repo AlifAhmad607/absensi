@@ -8,6 +8,8 @@ class Approutes {
   static const String Profile = '/profile';
   static const String TablePremiere= '/tablePremiere';
   static const String splashscreen= '/splashscreen';
-  
-  
+  static const String tambahabsen= '/tambah';
+  static const String editabsen= '/edit';
+  static const String homeAbsensi = '/homeabsensi';
+  static const String listAbsen = '/listabsen';
 }

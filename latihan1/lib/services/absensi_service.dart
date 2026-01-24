@@ -2,10 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 class AbsensiService {
-  // Ambil default app
   final FirebaseApp app = Firebase.app();
 
-  // Pakai instanceFor dengan databaseURL Singapore
   late final DatabaseReference _db = FirebaseDatabase.instanceFor(
     app: app,
     databaseURL: "https://flutterpushnotification-ec867-default-rtdb.asia-southeast1.firebasedatabase.app",
