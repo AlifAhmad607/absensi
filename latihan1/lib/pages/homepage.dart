@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:latihan1/controller/navcontroller.dart';
 import 'package:latihan1/pages/calculatorpage.dart';
-import 'package:latihan1/pages/footballpage.dart';
 import 'package:latihan1/pages/profilepage.dart';
 import 'package:latihan1/pages/tablepremierepage.dart';
 

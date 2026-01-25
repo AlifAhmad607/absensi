@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:latihan1/Model/LoginApi.dart';
 import 'package:latihan1/pages/homepage.dart';
-import 'package:latihan1/pages/profilepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
