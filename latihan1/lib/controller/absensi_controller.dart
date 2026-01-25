@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
-import '../services/absensi_service.dart';
+import 'package:get/get.dart';
+import 'package:latihan1/services/absensi_service.dart';
 
-class AbsensiController {
+class AbsensiController extends GetxController {
   final AbsensiService service;
 
   AbsensiController({required this.service});
 
-  final TextEditingController namaC = TextEditingController();
-  final TextEditingController kelasC = TextEditingController();
-  String status = "Hadir";
+  final namaC = TextEditingController();
+  final kelasC = TextEditingController();
+  var status = "Hadir".obs;
 
   void isiDariData(Map<String, dynamic> data) {
-    namaC.text = data["nama"];
-    kelasC.text = data["kelas"];
-    status = data["status"];
+    namaC.text = data["nama"] ?? '';
+    kelasC.text = data["kelas"] ?? '';
+    status.value = data["status"] ?? 'Hadir';
   }
 
-  Future<void> tambahAbsensi(BuildContext context) async {
+  Future<void> tambahAbsensi() async {
     if (namaC.text.isEmpty || kelasC.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Nama dan kelas tidak boleh kosong")),
+      Get.snackbar(
+        "Peringatan",
+        "Nama dan kelas tidak boleh kosong",
+        backgroundColor: Colors.orange.shade100,
+        colorText: Colors.black,
+        snackPosition: SnackPosition.BOTTOM,
       );
       return;
     }
@@ -27,25 +32,30 @@ class AbsensiController {
     await service.tambahAbsensi(
       nama: namaC.text,
       kelas: kelasC.text,
-      status: status,
+      status: status.value,
     );
 
     namaC.clear();
     kelasC.clear();
-    status = "Hadir";
+    status.value = "Hadir";
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Data berhasil ditambahkan")),
+    Get.snackbar(
+      "Sukses",
+      "Data berhasil ditambahkan",
+      backgroundColor: Colors.green.shade100,
+      colorText: Colors.black,
+      snackPosition: SnackPosition.BOTTOM,
     );
   }
 
-  Future<void> updateAbsensi({
-    required BuildContext context,
-    required String key,
-  }) async {
+  Future<void> updateAbsensi(String key) async {
     if (namaC.text.isEmpty || kelasC.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Nama dan kelas tidak boleh kosong")),
+      Get.snackbar(
+        "Peringatan",
+        "Nama dan kelas tidak boleh kosong",
+        backgroundColor: Colors.orange.shade100,
+        colorText: Colors.black,
+        snackPosition: SnackPosition.BOTTOM,
       );
       return;
     }
@@ -54,16 +64,23 @@ class AbsensiController {
       key: key,
       nama: namaC.text,
       kelas: kelasC.text,
-      status: status,
+      status: status.value,
     );
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Data berhasil diperbarui")),
+    Get.back();
+    Get.snackbar(
+      "Sukses",
+      "Data berhasil diperbarui",
+      backgroundColor: Colors.green.shade100,
+      colorText: Colors.black,
+      snackPosition: SnackPosition.BOTTOM,
     );
   }
 
-  void dispose() {
+  @override
+  void onClose() {
     namaC.dispose();
     kelasC.dispose();
+    super.onClose();
   }
 }
