@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:latihan1/pages/absensi_tambah.dart';
-import 'package:latihan1/pages/absensi_list.dart';
+import 'package:latihan1/pages/absensi/absensi_list.dart';
+import 'package:latihan1/pages/absensi/absensi_tambah.dart';
 
 class NavbarController extends GetxController {
   var selectedIndex = 0.obs;

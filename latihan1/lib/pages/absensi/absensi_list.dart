@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:latihan1/responsive/responsive.dart';
 import 'package:latihan1/services/absensi_service.dart';
 import 'package:latihan1/Routes/Approutes.dart';
 import 'package:latihan1/config/app_theme.dart';
@@ -27,7 +28,7 @@ class AbsensiListPage extends StatelessWidget {
               ),
             );
           }
-          
+
           if (!snapshot.hasData || snapshot.data!.snapshot.value == null) {
             return const EmptyState(
               message: "Belum ada data absensi\nTambahkan data di tab Tambah",
@@ -39,7 +40,10 @@ class AbsensiListPage extends StatelessWidget {
           final entries = data.entries.toList().reversed;
 
           return ListView.builder(
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            padding: EdgeInsets.symmetric(
+              vertical: 12,
+              horizontal: Responsive.isMobile(context) ? 16 : 32,
+            ),
             itemCount: entries.length,
             itemBuilder: (context, index) {
               final e = entries.elementAt(index);
@@ -58,12 +62,15 @@ class AbsensiListPage extends StatelessWidget {
                     );
                   },
                   child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: EdgeInsets.all(
+                      Responsive.isMobile(context) ? 16 : 20,
+                    ),
                     child: Row(
                       children: [
+                        // AVATAR
                         Container(
-                          width: 50,
-                          height: 50,
+                          width: Responsive.isMobile(context) ? 48 : 60,
+                          height: Responsive.isMobile(context) ? 48 : 60,
                           decoration: BoxDecoration(
                             gradient: AppTheme.primaryGradient,
                             borderRadius: BorderRadius.circular(12),
@@ -71,28 +78,33 @@ class AbsensiListPage extends StatelessWidget {
                           child: Center(
                             child: Text(
                               val["nama"]?.substring(0, 1).toUpperCase() ?? "?",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 22,
+                                fontSize:
+                                    Responsive.isMobile(context) ? 20 : 24,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
                         ),
-                        const Padding(padding: EdgeInsets.only(right: 16)),
+
+                        const SizedBox(width: 16),
+
+                        // INFO
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 val["nama"] ?? "-",
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 16,
+                                  fontSize:
+                                      Responsive.isMobile(context) ? 16 : 18,
                                   color: AppTheme.textPrimary,
                                 ),
                               ),
-                              const Padding(padding: EdgeInsets.only(top: 4)),
+                              const SizedBox(height: 4),
                               Row(
                                 children: [
                                   const Icon(
@@ -100,35 +112,41 @@ class AbsensiListPage extends StatelessWidget {
                                     size: 14,
                                     color: AppTheme.textSecondary,
                                   ),
-                                  const Padding(padding: EdgeInsets.only(right: 4)),
+                                  const SizedBox(width: 4),
                                   Text(
                                     val["kelas"] ?? '-',
-                                    style: const TextStyle(
-                                      fontSize: 13,
+                                    style: TextStyle(
+                                      fontSize: Responsive.isMobile(context)
+                                          ? 12
+                                          : 13,
                                       color: AppTheme.textSecondary,
                                     ),
                                   ),
-                                  const Padding(padding: EdgeInsets.symmetric(horizontal: 6)),
+                                  const SizedBox(width: 8),
                                   const Icon(
                                     Icons.calendar_today,
                                     size: 14,
                                     color: AppTheme.textSecondary,
                                   ),
-                                  const Padding(padding: EdgeInsets.only(right: 4)),
+                                  const SizedBox(width: 4),
                                   Text(
                                     val["tanggal"] ?? '-',
-                                    style: const TextStyle(
-                                      fontSize: 13,
+                                    style: TextStyle(
+                                      fontSize: Responsive.isMobile(context)
+                                          ? 12
+                                          : 13,
                                       color: AppTheme.textSecondary,
                                     ),
                                   ),
                                 ],
                               ),
-                              const Padding(padding: EdgeInsets.only(top: 8)),
+                              const SizedBox(height: 8),
                               StatusBadge(status: val["status"] ?? "Hadir"),
                             ],
                           ),
                         ),
+
+                        // MENU
                         PopupMenuButton<String>(
                           icon: const Icon(
                             Icons.more_vert,
@@ -147,23 +165,27 @@ class AbsensiListPage extends StatelessWidget {
                               _confirmDelete(service, key);
                             }
                           },
-                          itemBuilder: (context) => [
-                            const PopupMenuItem(
+                          itemBuilder: (context) => const [
+                            PopupMenuItem(
                               value: "edit",
                               child: Row(
                                 children: [
-                                  Icon(Icons.edit_rounded, size: 20, color: AppTheme.primaryGreen),
-                                  Padding(padding: EdgeInsets.only(right: 12)),
+                                  Icon(Icons.edit_rounded,
+                                      size: 20,
+                                      color: AppTheme.primaryGreen),
+                                  SizedBox(width: 12),
                                   Text("Edit Data"),
                                 ],
                               ),
                             ),
-                            const PopupMenuItem(
+                            PopupMenuItem(
                               value: "delete",
                               child: Row(
                                 children: [
-                                  Icon(Icons.delete_rounded, size: 20, color: AppTheme.errorColor),
-                                  Padding(padding: EdgeInsets.only(right: 12)),
+                                  Icon(Icons.delete_rounded,
+                                      size: 20,
+                                      color: AppTheme.errorColor),
+                                  SizedBox(width: 12),
                                   Text("Hapus Data"),
                                 ],
                               ),
@@ -189,8 +211,8 @@ class AbsensiListPage extends StatelessWidget {
         fontWeight: FontWeight.bold,
         color: AppTheme.errorColor,
       ),
-      middleText: "Yakin ingin menghapus data ini?\nData yang dihapus tidak dapat dikembalikan.",
-      middleTextStyle: const TextStyle(fontSize: 14),
+      middleText:
+          "Yakin ingin menghapus data ini?\nData yang dihapus tidak dapat dikembalikan.",
       radius: 12,
       textCancel: "Batal",
       textConfirm: "Hapus",
@@ -205,7 +227,6 @@ class AbsensiListPage extends StatelessWidget {
           "Data berhasil dihapus",
           backgroundColor: AppTheme.errorColor.withOpacity(0.1),
           colorText: AppTheme.errorColor,
-          icon: const Icon(Icons.check_circle, color: AppTheme.errorColor),
           snackPosition: SnackPosition.BOTTOM,
           margin: const EdgeInsets.all(16),
           borderRadius: 12,
