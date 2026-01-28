@@ -38,7 +38,6 @@ class TambahAbsensiPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // HEADER
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -85,7 +84,6 @@ class TambahAbsensiPage extends StatelessWidget {
 
                       const SizedBox(height: 24),
 
-                      // FORM
                       CustomTextField(
                         controller: controller.namaC,
                         label: "Nama Lengkap",

@@ -37,7 +37,7 @@ class Apppage {
     GetPage(
       name: Approutes.homeAbsensi,
       page: () => const HomeAbsensiPage(),
-      binding: AbsensiBinding(), // Pastikan binding ada
+      binding: AbsensiBinding(),
     ),
     GetPage(
       name: Approutes.listAbsen,

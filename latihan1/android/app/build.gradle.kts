@@ -21,7 +21,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.latihan1"
-        minSdk = 23
+        minSdk = flutter.minSdkVersion
         targetSdk = 35
         versionCode = 1 
         versionName = "1.0"
